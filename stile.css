@@ -1,62 +1,62 @@
-/* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&family=Inter:wght@400;500&display=swap');
-
 /* Base Styles */
 body {
     font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
-.font-poppins {
+
+h1, h2, h3, h4, h5, h6 {
     font-family: 'Poppins', sans-serif;
 }
-.section-title {
-    @apply text-3xl md:text-4xl font-bold text-[#1D2D3E] mb-16 text-center font-poppins;
-}
-.form-input {
-    @apply w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#007BFF] focus:border-transparent outline-none transition;
-}
 
-/* Animations */
-.masked-text-container {
+/* Masked Text Animation */
+.masked-text {
     overflow: hidden;
 }
-.masked-text-container > * {
+
+.masked-text > * {
     transform: translateY(100%);
-    opacity: 0;
-    animation: reveal-text 0.8s 0.5s ease-out forwards;
-}
-@keyframes reveal-text {
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.animate-fade-in-delayed {
-    opacity: 0;
-    animation: fade-in 0.8s 1.2s ease-out forwards;
-}
-@keyframes fade-in {
-    to { opacity: 1; }
+.masked-text.is-visible > * {
+    transform: translateY(0%);
 }
 
-.animate-slide-in {
-    opacity: 0;
-    transform: translateX(100px);
-    animation: slide-in 1s 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-@keyframes slide-in {
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
+/* General Section Animation */
 .animated-section {
     opacity: 0;
     transform: translateY(50px);
     transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
-.animated-section.is-in-view {
+
+.animated-section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Hero Image Animation */
+.hero-image-container {
+    opacity: 0;
+    transform: translateX(100px);
+    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: 0.5s;
+}
+
+.hero-image-container.is-visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Initial state for items animated by JS */
+.animated-item {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    transition-delay: 1.2s;
+}
+
+.animated-item.is-visible {
     opacity: 1;
     transform: translateY(0);
 }
