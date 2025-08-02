@@ -1,0 +1,62 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&family=Inter:wght@400;500&display=swap');
+
+/* Base Styles */
+body {
+    font-family: 'Inter', sans-serif;
+}
+.font-poppins {
+    font-family: 'Poppins', sans-serif;
+}
+.section-title {
+    @apply text-3xl md:text-4xl font-bold text-[#1D2D3E] mb-16 text-center font-poppins;
+}
+.form-input {
+    @apply w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#007BFF] focus:border-transparent outline-none transition;
+}
+
+/* Animations */
+.masked-text-container {
+    overflow: hidden;
+}
+.masked-text-container > * {
+    transform: translateY(100%);
+    opacity: 0;
+    animation: reveal-text 0.8s 0.5s ease-out forwards;
+}
+@keyframes reveal-text {
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.animate-fade-in-delayed {
+    opacity: 0;
+    animation: fade-in 0.8s 1.2s ease-out forwards;
+}
+@keyframes fade-in {
+    to { opacity: 1; }
+}
+
+.animate-slide-in {
+    opacity: 0;
+    transform: translateX(100px);
+    animation: slide-in 1s 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes slide-in {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.animated-section {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.animated-section.is-in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
