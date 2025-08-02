@@ -1,6 +1,66 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function () {
 
-    // --- DATA ---
+    // --- Header Logic ---
+    const header = document.getElementById('header');
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    // Handle header style on scroll
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 10) {
+            header.classList.add('shadow-lg');
+        } else {
+            header.classList.remove('shadow-lg');
+        }
+    });
+    
+    // Toggle mobile menu
+    mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+    
+    // Close mobile menu on link click
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href');
+            document.querySelector(targetId).scrollIntoView({ behavior: 'smooth' });
+            if (!mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.add('hidden');
+            }
+        });
+    });
+
+    // --- General Animations with Intersection Observer ---
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.masked-text, .animated-section, .hero-image-container, .animated-item').forEach(el => {
+        observer.observe(el);
+    });
+
+    // --- Magnetic Button Logic ---
+    document.querySelectorAll('.magnetic-button').forEach(button => {
+        button.addEventListener('mousemove', (e) => {
+            const { clientX, clientY } = e;
+            const { height, width, left, top } = button.getBoundingClientRect();
+            const middleX = clientX - (left + width / 2);
+            const middleY = clientY - (top + height / 2);
+            button.style.transform = `translate(${middleX * 0.1}px, ${middleY * 0.1}px)`;
+        });
+        button.addEventListener('mouseleave', () => {
+            button.style.transform = 'translate(0, 0)';
+        });
+    });
+
+    // --- Data for Dynamic Sections ---
     const timelineEvents = [
         { year: "2005", title: "Foundation Laid", description: "RK Construction is founded in San Antonio with a single backhoe and a commitment to quality.", image: "https://placehold.co/600x800/0D2B45/F8F9FA?text=2005" },
         { year: "2012", title: "Expansion to Austin", description: "Responding to regional growth, we expand our services to the booming Austin market.", image: "https://placehold.co/600x800/007BFF/FFFFFF?text=2012" },
@@ -9,142 +69,80 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     const services = [
-        { icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-12 h-12"><path d="M2 22v-5l5-5 5 5-5 5z"></path><path d="M9.5 14.5 16 8l3 3-6.5 6.5z"></path><path d="m17 5 3 3"></path><path d="m2 2 5 5"></path></svg>`, title: "Excavation" },
+        { icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-12 h-12"><path d="M2 17a2 2 0 104 0 2 2 0 10-4 0zM9 17a2 2 0 104 0 2 2 0 10-4 0zM16 17a2 2 0 104 0 2 2 0 10-4 0z" /><path d="M4.5 17h-3M11.5 17h-1M18.5 17h-1" /><path d="M18 17l-3-9 2-3h3l2 3-3 9" /><path d="M8 17l-3-9 2-3h3l2 3-3 9" /><path d="M11 5l-2-3" /><path d="M15 5l2-3" /><path d="M9 8h6" /></svg>`, title: "Excavation" },
         { icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-12 h-12"><path d="M20.5 15.5c.3-1 .5-2.2.5-3.5a8.5 8.5 0 00-17 0c0 1.3.2 2.5.5 3.5" /><path d="M4 14h16" /><path d="M12 12V2.5" /><path d="M12 2.5L10.5 4" /><path d="M12 2.5L13.5 4" /></svg>`, title: "Demolition" },
         { icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-12 h-12"><path d="M3 3l18 18-5-5" /><path d="M13.5 8.5l4-4" /><path d="M2 8l4-4" /><path d="M2 13l4-4" /><path d="M2 18l4-4" /></svg>`, title: "Site Grading" },
         { icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-12 h-12"><path d="M14 22v-4a2 2 0 00-2-2H7a2 2 0 00-2 2v4h9zM5 16V9a2 2 0 012-2h5l4 4v5h-2M9 7V2l4 4"/></svg>`, title: "Paving & Concrete" },
     ];
-    
+
     const projects = [
         { title: "Commercial Site Prep, Austin", image: "https://placehold.co/800x600/0D2B45/FFFFFF?text=Project+1" },
         { title: "Residential Pool Excavation, San Antonio", image: "https://placehold.co/800x600/007BFF/FFFFFF?text=Project+2" },
         { title: "Utility Trenching, Corpus Christi", image: "https://placehold.co/800x600/1D2D3E/FFFFFF?text=Project+3" }
     ];
 
-    // --- HEADER & NAVIGATION ---
-    const header = document.getElementById('header');
-    const menuBtn = document.getElementById('menu-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const menuOpenIcon = document.getElementById('menu-open-icon');
-    const menuCloseIcon = document.getElementById('menu-close-icon');
-    const navLinks = document.querySelectorAll('.nav-link');
-
-    window.addEventListener('scroll', () => {
-        header.classList.toggle('shadow-lg', window.scrollY > 10);
-        header.classList.toggle('shadow-sm', window.scrollY <= 10);
-    }, { passive: true });
-
-    menuBtn.addEventListener('click', () => {
-        const isOpen = mobileMenu.classList.toggle('hidden');
-        menuOpenIcon.classList.toggle('hidden', !isOpen);
-        menuCloseIcon.classList.toggle('hidden', isOpen);
+    // --- Populate Dynamic Sections ---
+    const aboutImageContainer = document.getElementById('about-image-container');
+    const aboutTextContainer = document.getElementById('about-text-container');
+    timelineEvents.forEach(event => {
+        aboutImageContainer.innerHTML += `<img src="${event.image}" alt="${event.title}" class="about-image absolute inset-0 w-full h-full object-cover rounded-lg shadow-2xl transition-opacity duration-500" style="opacity: 0;"/>`;
+        aboutTextContainer.innerHTML += `<div class="about-text-item absolute inset-0 flex flex-col justify-center transition-all duration-500" style="opacity: 0; transform: translateY(20px);">
+            <div class="p-8 bg-gray-50/80 backdrop-blur-sm rounded-lg border border-gray-200">
+                <p class="text-2xl font-bold text-[#007BFF] font-poppins mb-2">${event.year}: ${event.title}</p>
+                <p class="text-gray-600">${event.description}</p>
+            </div>
+        </div>`;
     });
-
-    navLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const targetId = link.getAttribute('href').substring(1);
-            document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth' });
-            if (!mobileMenu.classList.contains('hidden')) {
-                mobileMenu.classList.add('hidden');
-                menuOpenIcon.classList.remove('hidden');
-                menuCloseIcon.classList.add('hidden');
-            }
-        });
-    });
-
-    // --- DYNAMIC CONTENT INJECTION ---
-    const timelineImageContainer = document.getElementById('timeline-image-container');
-    const timelineTextContainer = document.getElementById('timeline-text-container');
-    if (timelineImageContainer && timelineTextContainer) {
-        timelineEvents.forEach((event, index) => {
-            timelineImageContainer.innerHTML += `<img src="${event.image}" alt="${event.title}" class="timeline-image absolute inset-0 w-full h-full object-cover rounded-lg shadow-2xl transition-opacity duration-500" style="opacity: ${index === 0 ? 1 : 0};" />`;
-            timelineTextContainer.innerHTML += `
-                <div class="timeline-text absolute inset-0 flex flex-col justify-center transition-all duration-500" style="opacity: ${index === 0 ? 1 : 0}; transform: translateY(0px);">
-                    <div class="p-8 bg-gray-50/80 backdrop-blur-sm rounded-lg border border-gray-200">
-                        <p class="text-2xl font-bold text-[#007BFF] font-poppins mb-2">${event.year}: ${event.title}</p>
-                        <p class="text-gray-600">${event.description}</p>
-                    </div>
-                </div>`;
-        });
-    }
 
     const servicesGrid = document.getElementById('services-grid');
-    if (servicesGrid) {
-        services.forEach(service => {
-            servicesGrid.innerHTML += `
-                <div class="group relative bg-white p-8 rounded-lg text-center shadow-lg border border-gray-100 overflow-hidden">
-                    <div class="absolute inset-0 bg-[#0D2B45] rounded-lg transition-transform duration-500 ease-in-out translate-y-full group-hover:translate-y-0"></div>
-                    <div class="relative z-10 transition-transform duration-300 group-hover:-translate-y-1">
-                        <div class="flex justify-center mb-5 text-[#007BFF] transition-colors duration-500 group-hover:text-white">${service.icon}</div>
-                        <h3 class="text-xl font-bold text-[#1D2D3E] mb-3 font-poppins transition-colors duration-500 group-hover:text-white">${service.title}</h3>
-                        <p class="text-gray-600 transition-colors duration-500 group-hover:text-gray-300">Precision work for projects of any scale.</p>
-                    </div>
-                </div>`;
-        });
-    }
-    
+    services.forEach((service, index) => {
+        servicesGrid.innerHTML += `<div class="group relative bg-white p-8 rounded-lg text-center shadow-lg border border-gray-100 animated-section" style="transition-delay: ${index * 0.1}s">
+            <div class="absolute inset-0 bg-[#0D2B45] rounded-lg transition-transform duration-500 ease-in-out translate-y-full group-hover:translate-y-0"></div>
+            <div class="relative z-10 transition-all duration-300 group-hover:-translate-y-1">
+                <div class="flex justify-center mb-5 text-[#007BFF] transition-colors duration-500 group-hover:text-white">${service.icon}</div>
+                <h3 class="text-xl font-bold text-[#1D2D3E] mb-3 font-poppins transition-colors duration-500 group-hover:text-white">${service.title}</h3>
+                <p class="text-gray-600 transition-colors duration-500 group-hover:text-gray-300">Precision work for projects of any scale.</p>
+            </div>
+        </div>`;
+    });
+
     const projectsGrid = document.getElementById('projects-grid');
-    if(projectsGrid) {
-        projects.forEach(project => {
-            projectsGrid.innerHTML += `
-                <div class="group relative h-96 rounded-lg overflow-hidden shadow-lg">
-                    <div class="overflow-hidden h-full">
-                        <img src="${project.image}" alt="${project.title}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-                    </div>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-                    <div class="absolute bottom-0 left-0 p-6">
-                        <h3 class="text-white text-xl font-bold font-poppins">${project.title}</h3>
-                    </div>
-                </div>`;
-        });
-    }
+    projects.forEach((project, index) => {
+        projectsGrid.innerHTML += `<div class="group relative h-96 rounded-lg overflow-hidden shadow-lg animated-section" style="transition-delay: ${index * 0.15}s">
+            <div class="overflow-hidden h-full">
+                <img src="${project.image}" alt="${project.title}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"/>
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 p-6">
+                <h3 class="text-white text-xl font-bold font-poppins">${project.title}</h3>
+            </div>
+        </div>`;
+    });
 
-    // --- INTERSECTION OBSERVER FOR ANIMATIONS ---
-    const animatedSections = document.querySelectorAll('.animated-section');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('is-in-view');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.1 });
-    animatedSections.forEach(section => observer.observe(section));
-
-    // --- STICKY SCROLL TIMELINE LOGIC ---
+    // --- About Sticky Scroll Logic ---
     const aboutSection = document.getElementById('about');
-    if(aboutSection) {
-        const images = aboutSection.querySelectorAll('.timeline-image');
-        const texts = aboutSection.querySelectorAll('.timeline-text');
-        const numEvents = timelineEvents.length;
-        
+    const aboutImages = document.querySelectorAll('.about-image');
+    const aboutTextItems = document.querySelectorAll('.about-text-item');
+    if (aboutSection) {
         window.addEventListener('scroll', () => {
             const { top, height } = aboutSection.getBoundingClientRect();
-            const scrollableDist = height - window.innerHeight;
-            
-            if (top <= 0 && top >= -scrollableDist) {
-                const progress = -top / scrollableDist;
-                const currentIndex = Math.floor(progress * (numEvents - 0.001));
+            const scrollableHeight = height - window.innerHeight;
+            let progress = (-top) / scrollableHeight;
+            progress = Math.max(0, Math.min(1, progress));
 
-                images.forEach((img, index) => {
-                    img.style.opacity = index === currentIndex ? '1' : '0';
-                });
+            const totalItems = timelineEvents.length;
+            const itemIndex = Math.floor(progress * totalItems);
 
-                texts.forEach((text, index) => {
-                    const distance = index - (progress * (numEvents -1));
-                    let opacity = 0;
-                    let y = 0;
-
-                    if (eventProgress >= -0.5 && eventProgress <= 0.5) {
-                        opacity = 1 - (Math.abs(eventProgress) / 0.5);
-                        y = eventProgress * 20;
-                    }
-                    
-                    text.style.opacity = opacity;
-                    text.style.transform = `translateY(${y}px)`;
-                });
-            }
-        }, { passive: true });
+            aboutImages.forEach((img, index) => {
+                img.style.opacity = index === itemIndex ? '1' : '0';
+            });
+            aboutTextItems.forEach((text, index) => {
+                const itemProgress = (progress * totalItems) - index;
+                const opacity = Math.max(0, 1 - Math.abs(itemProgress - 0.5) * 2);
+                const y = (itemProgress - 0.5) * -40;
+                text.style.opacity = opacity;
+                text.style.transform = `translateY(${y}px)`;
+            });
+        });
     }
 });
