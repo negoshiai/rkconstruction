@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RK Construction | Texas Strong. Precision Driven.</title>
+    <meta name="description" content="Your trusted partner for excavation, demolition, and site preparation across Central Texas.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-[#F8F9FA] font-inter antialiased">
+
+    <!-- Header -->
+    <header id="header" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-white/80 backdrop-blur-sm shadow-sm">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <a href="#hero" class="nav-link text-2xl font-bold font-poppins text-[#0D2B45]">RKC</a>
+                <nav class="hidden md:flex space-x-1">
+                    <a href="#about" class="nav-link text-sm font-medium text-[#0D2B45] rounded-md px-4 py-2 hover:text-[#007BFF]">About</a>
+                    <a href="#services" class="nav-link text-sm font-medium text-[#0D2B45] rounded-md px-4 py-2 hover:text-[#007BFF]">Services</a>
+                    <a href="#projects" class="nav-link text-sm font-medium text-[#0D2B45] rounded-md px-4 py-2 hover:text-[#007BFF]">Projects</a>
+                    <a href="#contact" class="nav-link text-sm font-medium text-[#0D2B45] rounded-md px-4 py-2 hover:text-[#007BFF]">Contact</a>
+                </nav>
+                <div class="md:hidden">
+                    <button id="menu-btn" class="focus:outline-none text-[#0D2B45]">
+                        <svg id="menu-open-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                        <svg id="menu-close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden fixed inset-0 z-40 bg-white/95 backdrop-blur-sm md:hidden">
+        <div class="pt-24 px-8 space-y-4">
+            <a href="#about" class="nav-link block w-full text-left py-3 text-lg font-medium text-gray-700 hover:text-[#007BFF]">About</a>
+            <a href="#services" class="nav-link block w-full text-left py-3 text-lg font-medium text-gray-700 hover:text-[#007BFF]">Services</a>
+            <a href="#projects" class="nav-link block w-full text-left py-3 text-lg font-medium text-gray-700 hover:text-[#007BFF]">Projects</a>
+            <a href="#contact" class="nav-link block w-full text-left py-3 text-lg font-medium text-gray-700 hover:text-[#007BFF]">Contact</a>
+        </div>
+    </div>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="bg-[#F8F9FA] min-h-screen w-full flex items-center overflow-hidden py-20">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="text-center md:text-left">
+                        <div class="masked-text-container">
+                            <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold font-poppins text-[#0D2B45] mb-6">Texas Strong. Precision Driven.</h1>
+                        </div>
+                        <div class="masked-text-container">
+                            <p class="text-lg md:text-xl max-w-xl mx-auto md:mx-0 text-gray-600">Your trusted partner for excavation, demolition, and site preparation across Central Texas.</p>
+                        </div>
+                        <div class="mt-10 animate-fade-in-delayed">
+                            <a href="#contact" class="nav-link inline-block bg-[#007BFF] text-white font-bold py-4 px-10 rounded-lg transition-transform hover:scale-105 shadow-lg hover:shadow-xl">
+                                Get a Free Quote
+                            </a>
+                        </div>
+                    </div>
+                    <div class="relative h-96 md:h-[500px] rounded-lg overflow-hidden shadow-2xl animate-slide-in">
+                        <img src="https://images.unsplash.com/photo-1621998902242-a81a1a432232?q=80&w=2070&auto=format&fit=crop" alt="Excavator" class="w-full h-full object-cover"/>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="animated-section py-20 md:py-28 bg-white">
+             <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="section-title">Our Story of Growth</h2>
+                <div id="timeline-grid" class="grid md:grid-cols-2 gap-16 items-center">
+                    <!-- Timeline content will be injected here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="animated-section py-20 md:py-28 bg-[#F8F9FA]">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="section-title">Our Core Capabilities</h2>
+                <div id="services-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Services will be injected here -->
+                </div>
+            </div>
+        </section>
+        
+        <!-- Projects Section -->
+        <section id="projects" class="animated-section py-20 md:py-28 bg-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="section-title">Featured Projects</h2>
+                <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Projects will be injected here -->
+                </div>
+            </div>
+        </section>
+        
+        <!-- Contact Section -->
+        <section id="contact" class="animated-section py-20 md:py-28 bg-[#F8F9FA]">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+                <h2 class="section-title">Request an Estimate</h2>
+                <form id="contact-form" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="md:col-span-2"><label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label><input type="text" id="name" class="form-input" required /></div>
+                    <div><label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label><input type="email" id="email" class="form-input" required /></div>
+                    <div><label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label><input type="tel" id="phone" class="form-input" /></div>
+                    <div class="md:col-span-2"><label for="service" class="block text-sm font-medium text-gray-700 mb-1">Service of Interest</label><select id="service" class="form-input bg-white"><option>Excavation</option><option>Demolition</option><option>Site Grading</option><option>Paving & Concrete</option><option>Other</option></select></div>
+                    <div class="md:col-span-2"><label for="message" class="block text-sm font-medium text-gray-700 mb-1">Project Details</label><textarea id="message" rows="5" class="form-input"></textarea></div>
+                    <div class="md:col-span-2 text-center">
+                        <button type="submit" class="bg-[#007BFF] text-white font-bold py-4 px-10 rounded-lg transition-all hover:bg-[#FF4136] hover:scale-105">Submit Request</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#1D2D3E] text-gray-400">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+                <div>
+                    <h3 class="text-2xl font-bold text-white mb-4 font-poppins">RKC</h3>
+                    <p class="text-sm">Your trusted excavation partner in San Antonio, Austin, and Corpus Christi.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">Services</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li>Excavation & Grading</li>
+                        <li>Demolition & Site Prep</li>
+                        <li>Paving & Concrete</li>
+                        <li>Utility Trenching</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">Get In Touch</h3>
+                    <p class="text-sm">San Antonio, TX<br/>(210) 123-4567<br/>contact@rkconstco.com</p>
+                </div>
+            </div>
+            <div class="mt-12 border-t border-gray-700 pt-8 text-center text-sm">
+                <p>&copy; 2024 RK Construction Co. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+</body>
+</html>
